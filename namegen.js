@@ -26,8 +26,8 @@
 						   "m", "n", "p", "r", "s", "t", "v", "w", "x", "y", "z"],
 		    doubleCon	= ["bb", "cc", "dd", "ff", "gg", "ll",  
 						   "mm", "nn", "pp", "rr", "ss", "tt"],
-		    jointCon	= ["bl","ch","cm","cn","ct","fl","ght","lph"
-						   "km","kn","mb","mph","nc","ng","nt","ph","sp"
+		    jointCon	= ["bl","ch","cm","cn","ct","fl","ght","lph",
+						   "km","kn","mb","mph","nc","ng","nt","ph","sp",
 						   "rch","rk","rph","sh","str","tch","th","tsch","wh", 
 						   "bl","br","ch","ck","cks","cl","cr","ct","dr","fl","fr",
 						   "ft","fth","gl","gr","lb","ld","lf","lk","lt","lth",
