@@ -28,7 +28,14 @@
 						   "mm", "nn", "pp", "rr", "ss", "tt"],
 		    jointCon	= ["bl","ch","cm","cn","ct","fl","ght","lph"
 						   "km","kn","mb","mph","nc","ng","nt","ph","sp"
-						   "rch","rk","rph","sh","str","tch","th","tsch","wh"],  
+						   "rch","rk","rph","sh","str","tch","th","tsch","wh", 
+						   "bl","br","ch","ck","cks","cl","cr","ct","dr","fl","fr",
+						   "ft","fth","gl","gr","lb","ld","lf","lk","lt","lth",
+						   "mp","ms","nc","nch","nd","ng","nk","nks","ns","nt",
+						   "nth","phr","pl","pr","ps","rch","rd","rds","rf","rk",
+						   "rl","rm","rn","rp","rs","rt","rth","sc","sh","shr",
+						   "sk","sl","sm","sn","sp","st","str","sts","sw",
+						   "tch","th","thr","tr","tw","wh","xt","xth"],  
 		    vocal 		= ["a", "e", "i", "o", "u"], 
 		    startVoc	= ["ae", "ai", "ou", "au"],
 		    doubleVoc	= ["ee", "oo", "au", "ie", "ae", "ai", "ou", "au", "ua", "io"], 
