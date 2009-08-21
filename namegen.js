@@ -59,25 +59,26 @@
 						   "sm", "sn", "sp", "st", "str", "th", "thr", "tr", 
 						   "tw", "wh"],  
 						   
-		    vocal 		= ["a", "e", "i", "o", "u"], 
+		    vowel 		= ["a", "e", "i", "o", "u"], 
 		    
-		    startVoc	= ["ae", "ai", "ou", "au"],
+		    startVow	= ["ae", "ai", "ou", "au"],
 		    
-		    doubleVoc	= ["ee", "oo", "au", "ie", "ae", "ai", "ou", "au", "ua", "io"], 
+		    doubleVow	= ["ee", "oo", "au", "ie", "ae", "ai", "ou", "au", "ua", "io"], 
 		 
 		//cache for performance, minor savings
 		    consoLen 		= last(conso),
 		    doubleConLen 	= last(doubleCon),
-		    jointConLen		= last(JoinCon),
+		    jointConLen		= last(jointCon),
    		    startConLen 	= last(startCon),
-		    vocalLen 		= last(vocal),
-		    startVocLen		= last(startVoc),
+		    vowelLen 		= last(vowel),
+		    startVowLen		= last(startVow),
+		    doubleVowLen	= last(doubleVow),
 		 
 		//init blank word
 		    word = "",   
 		 
 		//random starts with a vowel
-		    startWithV = !!getRandom(0, 1),
+		    startWithV = true, //!!getRandom(0, 1),
 		 
 			//capture starting vowel and done reuse it if double
 		    startVowel = "",
@@ -104,11 +105,11 @@
 					//20% chance for a double vowel, 
 					if(getRandom(5) > 1)
 					{
-						curVowel = vowel[getRandom(0, consoLen)];
+						curVowel = vowel[getRandom(0, vowelLen)];
 					} 
 					else
 					{
-						curVowel = startVoc[getRandom(0, startVocLen)];
+						curVowel = startVow[getRandom(0, startVowLen)];
 						startVowel = curVowel;
 					}
 					
@@ -119,12 +120,17 @@
 					//20% chance for a double vowel, 
 					if(getRandom(5) > 1)
 					{
-						curVowel = vowel[getRandom(0, consoLen)];
+						curVowel = vowel[getRandom(0, vowelLen)];
 					} 
 					else
 					{
-						curVowel = startVoc[getRandom(0, startVocLen)];
-						startVowel = curVowel;
+						//prevent using the same starting vowel set
+						do
+						{
+							curVowel = doubleVow[getRandom(0, doubleVowLen)];
+						}
+						while (startVowel === curVowel);
+					
 					}
 				}
 				//more complicated consonant groups should come up less
@@ -134,13 +140,13 @@
 				{
 					curCon = jointCon[getRandom(0, jointConLen)];
 				}
-				else if (tempNum == 2)
+				else if (tempNum == 2 && i != syl)
 				{
 					curCon = doubleCon[getRandom(0, doubleConLen)];
 				}
 				else
 				{
-					curCon = conso[getRandom(0, doubleConLen)];
+					curCon = conso[getRandom(0, consoLen)];
 				}
 
 			}
