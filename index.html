@@ -1,0 +1,56 @@
+<!Doctype html>
+<html>
+	<head>
+		<title>New NameGenTest</title>
+		<style type="text/css">
+			#num {
+				display:inline;
+				border:1px grey solid;
+				margin-right:10px;
+				padding:2px 5px;
+			}
+		</style>
+	</head>
+	<body>
+		Number of Sylables <div id="num">3</div><button id="goUp"> + </button><button id="goDown"> - </button>
+		<br/>
+		<br/>
+		<button id="goDoIt">Generate name</button>
+		<br/>
+		<br/>
+		<div id="output">
+			
+		</div>
+		<script type="text/javascript">
+			var byId = function(id)
+			{
+				return document.getElementById(id);
+			}
+			var num = byId('num');
+			byId('goUp').onclick = function()
+			{
+				num.innerHTML = parseInt(num.innerHTML, 10) + 1;
+			}
+			byId('goDown').onclick = function()
+			{
+				var val = parseInt(num.innerHTML, 10);
+				if(val > 2)
+				{
+					num.innerHTML = parseInt(num.innerHTML, 10) - 1;
+				}
+			}
+			var out = byId('output');
+			function print(s)
+			{
+				out.innerHTML = s + "<br/>" + out.innerHTML;
+			}
+		</script>
+		<script src="namegen.js"></script>
+		<script type="text/javascript">
+			byId('goDoIt').onclick = function()
+			{
+				print(capitalize(randomName(parseInt(num.innerHTML, 10))));
+			};
+		</script>
+	</body>
+</html>

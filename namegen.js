@@ -1,4 +1,4 @@
-(function(){
+/*(function(){*/
 	
 	//function to get random number upto m
 	function getRandom(minVal,maxVal)
@@ -84,17 +84,20 @@
 		    startVowel = "",
 			
 			//dont use more than one double consonant
-			hasDoubleCon = false,
+			uDoubleCon = "",
 			
 			//dont use more than one complicated consonat group
-			hasJointCon	 = false;
+			uJointCon  = "",
+			
+			//dont use the same consonant group as the starting one
+			uStartCon  = "";
 			
 		//end of variable declaration 
 		
 		for(var i = 1; i <= syl; i++)  
 		{
 			//defaults
-			var curVowel, curCon;
+			var curVowel = "", curCon = "";
 			
 			//if this is a starting vowel
 			if(startWithV)
@@ -134,19 +137,36 @@
 					}
 				}
 				//more complicated consonant groups should come up less
-				var tempNum = getRandom(6);
-				//1 in 3 chance for a compound consonant
-				if(tempNum == 1)
+				var tempNum = getRandom(6),
+				
+				//default for generating a consonant
+				    hasCon = true;
+				
+				//if last syl
+				if(i == syl)
 				{
-					curCon = jointCon[getRandom(0, jointConLen)];
+					//if this is the last sylable, 
+					//randomize whether or not it ends in a consonant
+					//if yes, randomize adding an e to the end (low chance)
+					var hasCon = !!getRandom(0, 1);
 				}
-				else if (tempNum == 2 && i != syl)
+				
+				//bool used to stop consonant gen
+				if(hasCon)
 				{
-					curCon = doubleCon[getRandom(0, doubleConLen)];
-				}
-				else
-				{
-					curCon = conso[getRandom(0, consoLen)];
+					//1 in 3 chance for a compound consonant
+					if(tempNum == 1)
+					{
+						curCon = jointCon[getRandom(0, jointConLen)];
+					}
+					else if (tempNum == 2 && i != syl)
+					{
+						curCon = doubleCon[getRandom(0, doubleConLen)];
+					}
+					else
+					{
+						curCon = conso[getRandom(0, consoLen)];
+					}
 				}
 
 			}
@@ -165,4 +185,4 @@
 	}
 	
 	print(capitalize(randomName()));
-})();
+/*})();*/
