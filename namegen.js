@@ -140,7 +140,10 @@
 				var tempNum = getRandom(6),
 				
 				//default for generating a consonant
-				    hasCon = true;
+				    hasCon = true,
+				
+				//a boolean for last item
+					lastItem = (i == syl);
 				
 				//if last syl
 				if(i == syl)
@@ -166,6 +169,12 @@
 					else
 					{
 						curCon = conso[getRandom(0, consoLen)];
+					}
+					//if this consonant is the last one
+					//do a chance for an ending e
+					if(lastItem && getRandom(4) === 4) 
+					{
+						curCon += "e"; 
 					}
 				}
 
