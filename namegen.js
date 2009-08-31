@@ -78,7 +78,7 @@
 		    word = "",   
 		 
 		//random starts with a vowel
-		    startWithV = true, //!!getRandom(0, 1),
+		    startWithV = !!getRandom(0, 1),
 		 
 			//capture starting vowel and done reuse it if double
 		    startVowel = "",
@@ -97,12 +97,16 @@
 		for(var i = 1; i <= syl; i++)  
 		{
 			//defaults
-			var curVowel = "", curCon = "";
+			var curVowel = "", 
+				curCon = "",
+		
+			//a boolean for last item
+				lastItem = (i === syl);
 			
 			//if this is a starting vowel
 			if(startWithV)
 			{
-				if(i == 1)
+				if(i === 1)
 				{
 					//start with 80% chance for single vowel and 
 					//20% chance for a double vowel, 
@@ -136,17 +140,15 @@
 					
 					}
 				}
+				
 				//more complicated consonant groups should come up less
 				var tempNum = getRandom(6),
 				
 				//default for generating a consonant
-				    hasCon = true,
-				
-				//a boolean for last item
-					lastItem = (i == syl);
+				    hasCon = true;
 				
 				//if last syl
-				if(i == syl)
+				if(lastItem)
 				{
 					//if this is the last sylable, 
 					//randomize whether or not it ends in a consonant
@@ -158,11 +160,11 @@
 				if(hasCon)
 				{
 					//1 in 3 chance for a compound consonant
-					if(tempNum == 1)
+					if(tempNum === 1)
 					{
 						curCon = jointCon[getRandom(0, jointConLen)];
 					}
-					else if (tempNum == 2 && i != syl)
+					else if (tempNum === 2 && !lastItem)
 					{
 						curCon = doubleCon[getRandom(0, doubleConLen)];
 					}
@@ -177,15 +179,71 @@
 						curCon += "e"; 
 					}
 				}
-
 			}
 			//starting consonant
 			else
 			{
+				if(i === 1)
+				{
+					//start with 50% chance for compoundCon and 
+					//50% chance for a single consonant 
+					if(getRandom(2) > 1)
+					{
+						curCon = conso[getRandom(0, consoLen)];
+					} 
+					else
+					{
+						curCon = startCon[getRandom(0, startConLen)];
+						uStartCon = curCon;
+					}
+				}
+				else
+				{
+					//more complicated consonant groups should come up less
+					var tempNum = getRandom(6);
+
+					//1 in 3 chance for a compound consonant
+					if(tempNum === 1)
+					{
+						//avoid using the same joint consonant as the starting one
+						do
+						{
+							curCon = jointCon[getRandom(0, jointConLen)];
+						}
+						while (uStartCon === curCon)
+						
+					}
+					else if (tempNum === 2 && !lastItem)
+					{
+						curCon = doubleCon[getRandom(0, doubleConLen)];
+					}
+					else
+					{
+						curCon = conso[getRandom(0, consoLen)];
+					}
+					//if this consonant is the last one
+					//do a chance for an ending e
+					if(lastItem && getRandom(4) === 4) 
+					{
+						curCon += "e"; 
+					}
+				}
 				
+				//do vowels for starting consonant	
+				
+				//start with 80% chance for single vowel and 
+				//20% chance for a double vowel, 
+				if(getRandom(5) > 1)
+				{
+					curVowel = vowel[getRandom(0, vowelLen)];
+				} 
+				else
+				{
+					curVowel = doubleVow[getRandom(0, doubleVowLen)];
+				}		
 			}
 			
-			//add to word
+			//add to word in order of which comes first
 			word += (startWithV) ? (curVowel + curCon) : (curCon + curVowel);
 		}
 		
