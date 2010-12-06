@@ -1,4 +1,4 @@
-/*(function(){*/
+(function(global, className){
 	
 	//function to get random number upto m
 	function getRandom(minVal,maxVal)
@@ -30,8 +30,7 @@
 
 	//the goodies!
 	function randomName(syl)
-	{  
-	
+	{  	
 		//begin variable declaration
 		//defauts
 		var syl = syl || 3,
@@ -251,5 +250,10 @@
 		return word;  
 	}
 	
-	print(capitalize(randomName()));
-/*})();*/
+	global[className] = {};
+	
+	global[className].randomName = randomName;
+	global[className].capitalize = capitalize;
+	
+	
+})(this, 'nameGen');
