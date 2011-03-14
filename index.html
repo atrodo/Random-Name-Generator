@@ -45,11 +45,12 @@
 				out.innerHTML = s + "<br/>" + out.innerHTML;
 			}
 		</script>
+		<script src="name_stats.js"></script>
 		<script src="namegen.js"></script>
 		<script type="text/javascript">
 			byId('goDoIt').onclick = function()
 			{
-				print(capitalize(randomName(parseInt(num.innerHTML, 10))));
+				print(nameGen.randomName(parseInt(num.innerHTML, 10)));
 			};
 		</script>
 	</body>
